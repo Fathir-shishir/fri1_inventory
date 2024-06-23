@@ -33,7 +33,9 @@ export const translationEN = {
         Adduser : "Add User",
         history:"History",
         assignedMobile: "Assigned Mobile",
-        scrapMobiles: "Scrap Mobiles"
+        scrapMobiles: "Scrap Mobiles",
+        mobiles: "Mobiles",
+        laptops:"Laptops"
     },
     login_page: {
         username: "Username",

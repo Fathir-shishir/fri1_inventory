@@ -18,6 +18,7 @@ import PersonAddOutlinedIcon from '@mui/icons-material/PersonAddOutlined';
 import PhoneAndroidOutlinedIcon from '@mui/icons-material/PhoneAndroidOutlined';
 import PhoneEnabledOutlinedIcon from '@mui/icons-material/PhoneEnabledOutlined';
 import HistoryOutlinedIcon from '@mui/icons-material/HistoryOutlined';
+import LaptopMacIcon from '@mui/icons-material/LaptopMac';
 
 
 // Components
@@ -126,56 +127,59 @@ const NavMenu = () => {
 
                     {/* History page end  */}
 
-                     {/* Assigned mobile page start */}
-                     <li>
-            <button
-              className={`flex gap-3 items-center px-4 py-2 rounded transition-all w-full ${useLoc.pathname == "/assignedMobile" ? "bg-valeo-green drop-shadow hover:bg-valeo-green-hover text-[#494949]" : "hover:bg-valeo-blue-hover text-[#f7f5f5]"}`}
-              onClick={() => handleNavigation("/assignedMobile")}
-            >
-              <div className={`flex h-7 items-center justify-center rounded w-7 ${useLoc.pathname == "/assignedMobile" ? "bg-valeo-blue" : ""}`}>
-                <PhoneEnabledOutlinedIcon 
-                  sx={{
-                    color: useLoc.pathname == "/assignedMobile" ? "white" : "",
-                    display: useLoc.pathname == "/assignedMobile" ? "block" : "none"
-                  }}
-                />
-                <PhoneEnabledOutlinedIcon 
-                  sx={{
-                    display: useLoc.pathname == "/assignedMobile" ? "none" : "block"
-                  }}
-                />
-              </div>
-              <span className="font-semibold text-xl">{t("nav_menu.assignedMobile")}</span>
-            </button>
-          </li>
 
-                       {/* Assigned mobile page end  */}
 
-        {/* add mobile page start */}
+        {/*  mobiles page start */}
 
         <li>
             <button
-              className={`flex gap-3 items-center px-4 py-2 rounded transition-all w-full ${useLoc.pathname == "/storeMobile" ? "bg-valeo-green drop-shadow hover:bg-valeo-green-hover text-[#494949]" : "hover:bg-valeo-blue-hover text-[#f7f5f5]"}`}
-              onClick={() => handleNavigation("/storeMobile")}
+              className={`flex gap-3 items-center px-4 py-2 rounded transition-all w-full ${useLoc.pathname == "/mobiles" ? "bg-valeo-green drop-shadow hover:bg-valeo-green-hover text-[#494949]" : "hover:bg-valeo-blue-hover text-[#f7f5f5]"}`}
+              onClick={() => handleNavigation("/mobiles")}
             >
               <div className={`flex h-7 items-center justify-center rounded w-7 ${useLoc.pathname == "/storeMobile" ? "bg-valeo-blue" : ""}`}>
                 <PhoneAndroidOutlinedIcon  
                   sx={{
-                    color: useLoc.pathname == "/storeMobile" ? "white" : "",
-                    display: useLoc.pathname == "/storeMobile" ? "block" : "none"
+                    color: useLoc.pathname == "/mobiles" ? "white" : "",
+                    display: useLoc.pathname == "/mobiles" ? "block" : "none"
                   }}
                 />
                 <PhoneAndroidOutlinedIcon  
                   sx={{
-                    display: useLoc.pathname == "/storeMobile" ? "none" : "block"
+                    display: useLoc.pathname == "/mobiles" ? "none" : "block"
                   }}
                 />
               </div>
-              <span className="font-semibold text-xl">{t("nav_menu.storeMobile")}</span>
+              <span className="font-semibold text-xl">{t("nav_menu.mobiles")}</span>
             </button>
           </li>
 
-        {/* add mobile page end  */}
+        {/*  mobiles page end  */}
+
+                {/*  laptops page start */}
+
+                <li>
+            <button
+              className={`flex gap-3 items-center px-4 py-2 rounded transition-all w-full ${useLoc.pathname == "/laptops" ? "bg-valeo-green drop-shadow hover:bg-valeo-green-hover text-[#494949]" : "hover:bg-valeo-blue-hover text-[#f7f5f5]"}`}
+              onClick={() => handleNavigation("/laptops")}
+            >
+              <div className={`flex h-7 items-center justify-center rounded w-7 ${useLoc.pathname == "/laptops" ? "bg-valeo-blue" : ""}`}>
+                <LaptopMacIcon   
+                  sx={{
+                    color: useLoc.pathname == "/laptops" ? "white" : "",
+                    display: useLoc.pathname == "/laptops" ? "block" : "none"
+                  }}
+                />
+                <LaptopMacIcon   
+                  sx={{
+                    display: useLoc.pathname == "/laptops" ? "none" : "block"
+                  }}
+                />
+              </div>
+              <span className="font-semibold text-xl">{t("nav_menu.laptops")}</span>
+            </button>
+          </li>
+
+        {/*  laptops page end  */}
 
           {/* add User page start */}
 
@@ -204,31 +208,6 @@ const NavMenu = () => {
 
           {/* add User page end  */}
 
-          {/* ScrapMobiles page start  */}
-
-          <li>
-            <button
-              className={`flex gap-3 items-center px-4 py-2 rounded transition-all w-full ${useLoc.pathname == "/scrapMobiles" ? "bg-valeo-green drop-shadow hover:bg-valeo-green-hover text-[#494949]" : "hover:bg-valeo-blue-hover text-[#f7f5f5]"}`}
-              onClick={() => handleNavigation("/ScrapMobiles")}
-            >
-              <div className={`flex h-7 items-center justify-center rounded w-7 ${useLoc.pathname == "/scrapMobiles" ? "bg-valeo-blue" : ""}`}>
-                <ListAltOutlinedIcon 
-                  sx={{
-                    color: useLoc.pathname == "/scrapMobiles" ? "white" : "",
-                    display: useLoc.pathname == "/scrapMobiles" ? "block" : "none"
-                  }}
-                />
-                <ListAltOutlinedIcon 
-                  sx={{
-                    display: useLoc.pathname == "/scrapMobiles" ? "none" : "block"
-                  }}
-                />
-              </div>
-              <span className="font-semibold text-xl">{t("nav_menu.scrapMobiles")}</span>
-            </button>
-  </li>
-
-          {/* ScrapMobiles page end  */}
 
   {/* dashboard page start  */}
 

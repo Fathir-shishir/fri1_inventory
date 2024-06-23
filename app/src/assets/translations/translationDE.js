@@ -33,7 +33,9 @@ export const translationDE = {
         Adduser : "Benutzer hinzufügen",
         history:"Geschichte",
         assignedMobile: "Zugewiesenes Handy",
-        scrapMobiles: "Schrott-Mobiltelefone"
+        scrapMobiles: "Schrott-Mobiltelefone",
+        mobiles: "Handys",
+        laptops:"Laptops"
     },
     login_page: {
         username: "Benutzername",

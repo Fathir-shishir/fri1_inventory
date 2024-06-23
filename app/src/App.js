@@ -10,6 +10,8 @@ import Details from './pages/Details ';
 import EditMobile from './pages/EditMobile';
 import ScrapMobiles from './pages/ScrapMobiles';
 import AddScrapMobile from './pages/AddScrapMobile';
+import Mobiles from './pages/Mobiles';
+import Laptops from './pages/Laptops';
 import Cookies from "js-cookie";
 
 
@@ -64,6 +66,8 @@ function App() {
                         }
                     />
                     <Route path="/login" element={<LoginPage />} />
+                    <Route path="/mobiles" element={<Mobiles />} />
+                    <Route path="/laptops" element={<Laptops />} />
                     <Route path="/home" element={<HomePage />} />
                     <Route path="/storeMobile" element={<AddMobiles />} />
                     <Route path="/details/:email" element={<Details />} />
