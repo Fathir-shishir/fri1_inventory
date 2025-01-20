@@ -4,19 +4,18 @@ import Layout from "../components/Layout/Layout";
 
 const Dashboard = () => {
     const [mobiles, setMobiles] = useState([]);
+    const [laptops, setLaptops] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         const fetchData = async () => {
-
             try {
-             
-  
                 const response = await axios.get(`/api/Dashboard.php`);
-                setMobiles(response.data);
+                setMobiles(response.data.mobileQuantities);
+                setLaptops(response.data.laptopQuantities);
             } catch (error) {
-                console.error('Error fetching mobile data:', error);
-                alert('Failed to load mobile data. Please try again later.');
+                console.error('Error fetching data:', error);
+                alert('Failed to load data. Please try again later.');
             } finally {
                 setIsLoading(false);
             }
@@ -25,10 +24,10 @@ const Dashboard = () => {
         fetchData();
     }, []);
 
-    const getTotalQuantities = () => {
+    const getTotalQuantities = (items) => {
         let total = 0;
-        mobiles.forEach(mobile => {
-            Object.values(mobile.quantities).forEach(quantity => {
+        items.forEach(item => {
+            Object.values(item.quantities).forEach(quantity => {
                 total += quantity;
             });
         });
@@ -38,27 +37,27 @@ const Dashboard = () => {
     if (isLoading) {
         return (
             <Layout>
-                <div>Loading mobile data...</div>
+                <div>Loading data...</div>
             </Layout>
         );
     }
 
-    if (!mobiles.length) {
+    if (!mobiles.length && !laptops.length) {
         return (
             <Layout>
-                <div>No mobile data found.</div>
+                <div>No data found.</div>
             </Layout>
         );
     }
 
     return (
         <Layout>
-            <div className="flex flex-wrap justify-center  ">
-                {/* Detail Column */}
-                <div className="w-full md:w-1/3 px-4 py-8 bg-gray-100 rounded-lg ">
-                    <div className="mb-4  text-lg bg-[#a0f630] text-white p-4 rounded-lg">
+            <div className="flex flex-wrap justify-center">
+                {/* Mobile Quantities Column */}
+                <div className="w-full md:w-1/2 px-4 py-8 bg-gray-100 rounded-lg">
+                    <div className="mb-4 text-lg bg-[#a0f630] text-white p-4 rounded-lg">
                         <h2 className="text-center">Mobile</h2>
-                        <h2 className="text-center">Total Quantity: {getTotalQuantities()}</h2>
+                        <h2 className="text-center">Total Quantity: {getTotalQuantities(mobiles)}</h2>
                     </div>
                     {mobiles.map((mobile, index) => (
                         <div key={index} className="mb-3 p-4 bg-white rounded-lg shadow-lg flex justify-between items-center">
@@ -72,15 +71,22 @@ const Dashboard = () => {
                     ))}
                 </div>
 
-                {/* Placeholder Columns for other content or layout balance */}
-                {/* Column 2 */}
-                <div className="w-full md:w-1/3 px-4">
-                    {/* Additional content can go here */}
-                </div>
-
-                {/* Column 3 */}
-                <div className="w-full md:w-1/3 px-4">
-                    {/* Additional content can go here */}
+                {/* Laptop Quantities Column */}
+                <div className="w-full md:w-1/2 px-4 py-8 bg-gray-100 rounded-lg">
+                    <div className="mb-4 text-lg bg-[#23395d] text-white p-4 rounded-lg">
+                        <h2 className="text-center">Laptop</h2>
+                        <h2 className="text-center">Total Quantity: {getTotalQuantities(laptops)}</h2>
+                    </div>
+                    {laptops.map((laptop, index) => (
+                        <div key={index} className="mb-3 p-4 bg-white rounded-lg shadow-lg flex justify-between items-center">
+                            <h4 className="mb-2 justify-center">{laptop.model}</h4>
+                            <div className="">
+                                {Object.entries(laptop.quantities).map(([condition, quantity]) => (
+                                    <p key={condition}>{condition}: {quantity}</p>
+                                ))}
+                            </div>
+                        </div>
+                    ))}
                 </div>
             </div>
         </Layout>

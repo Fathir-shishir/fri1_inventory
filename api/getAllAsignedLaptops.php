@@ -6,21 +6,21 @@ try {
     $conn = createConnection();
 
     if ($conn) {
-        // SQL Query to fetch all mobile data
-        $tsql = "SELECT [id], [model], [imei], [serial_number], [comment], [created_at], [assignedTo], [condition], [signature_data] FROM dbo.assignedMobile";
+        // SQL Query to fetch all laptop data
+        $tsql = "SELECT [id], [model], [macAddress], [serial_number], [comment], [created_at], [assignedTo], [condition], [signature_data],[assignedBy] FROM dbo.assignedLaptop";
         $getResults = sqlsrv_query($conn, $tsql);
         if ($getResults === false) {
             echo json_encode(array("error" => "Error in query execution.", "details" => sqlsrv_errors()));
             exit;
         }
 
-        $mobiles = [];
+        $laptops = [];
         while ($row = sqlsrv_fetch_array($getResults, SQLSRV_FETCH_ASSOC)) {
-            $mobiles[] = $row; // Add mobile data to mobiles array
+            $laptops[] = $row; // Add laptop data to laptops array
         }
 
         // If execution is successful
-        echo json_encode(array("success" => true, "mobiles" => $mobiles));
+        echo json_encode(array("success" => true, "laptops" => $laptops));
 
         // Free the statement resource
         sqlsrv_free_stmt($getResults);

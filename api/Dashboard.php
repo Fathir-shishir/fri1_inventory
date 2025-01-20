@@ -1,49 +1,76 @@
 <?php
 // Allow requests from any origin - adjust in production!
-
 require_once("./functions.php");
-
-
 
 // Connect using SQL Server Authentication.
 try {
-$conn = createConnection();
+    $conn = createConnection();
 
+    // SQL query to select data grouped by model and condition for mobileQuantities
+    $sqlMobile = "SELECT model, 
+                         SUM(CASE WHEN condition = 'New' THEN totalQuantities ELSE 0 END) AS newQuantities, 
+                         SUM(CASE WHEN condition = 'Used' THEN totalQuantities ELSE 0 END) AS usedQuantities 
+                  FROM dbo.mobileQuantities 
+                  GROUP BY model";
 
-// SQL query to select data grouped by model and condition
-$sql = "SELECT model, 
-               SUM(CASE WHEN condition = 'New' THEN totalQuantities ELSE 0 END) AS newQuantities, 
-               SUM(CASE WHEN condition = 'Used' THEN totalQuantities ELSE 0 END) AS usedQuantities 
-        FROM dbo.mobileQuantities 
-        GROUP BY model";
+    $stmtMobile = sqlsrv_query($conn, $sqlMobile);
 
-$stmt = sqlsrv_query($conn, $sql);
+    if ($stmtMobile === false) {
+        die(print_r(sqlsrv_errors(), true));
+    }
 
-if ($stmt === false) {
-    die(print_r(sqlsrv_errors(), true));
-}
+    $mobileQuantities = [];
 
-$mobileQuantities = [];
+    while ($row = sqlsrv_fetch_array($stmtMobile, SQLSRV_FETCH_ASSOC)) {
+        $mobileQuantities[] = [
+            'model' => $row["model"],
+            'quantities' => [
+                'New' => $row["newQuantities"],
+                'Used' => $row["usedQuantities"]
+            ]
+        ];
+    }
 
-while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
-    $mobileQuantities[] = [
-        'model' => $row["model"],
-        'quantities' => [
-            'New' => $row["newQuantities"],
-            'Used' => $row["usedQuantities"]
-        ]
+    // SQL query to select data grouped by model and condition for laptopQuantities
+    $sqlLaptop = "SELECT model, 
+                         SUM(CASE WHEN condition = 'New' THEN totalQuantities ELSE 0 END) AS newQuantities, 
+                         SUM(CASE WHEN condition = 'Used' THEN totalQuantities ELSE 0 END) AS usedQuantities 
+                  FROM dbo.laptopQuantities 
+                  GROUP BY model";
+
+    $stmtLaptop = sqlsrv_query($conn, $sqlLaptop);
+
+    if ($stmtLaptop === false) {
+        die(print_r(sqlsrv_errors(), true));
+    }
+
+    $laptopQuantities = [];
+
+    while ($row = sqlsrv_fetch_array($stmtLaptop, SQLSRV_FETCH_ASSOC)) {
+        $laptopQuantities[] = [
+            'model' => $row["model"],
+            'quantities' => [
+                'New' => $row["newQuantities"],
+                'Used' => $row["usedQuantities"]
+            ]
+        ];
+    }
+
+    // Combine the results
+    $result = [
+        'mobileQuantities' => $mobileQuantities,
+        'laptopQuantities' => $laptopQuantities
     ];
-}
 
-if (count($mobileQuantities) > 0) {
     // Output data as JSON
-    echo json_encode($mobileQuantities);
-} else {
-    echo json_encode(['message' => 'No mobile quantities found']);
-}
+    if (count($mobileQuantities) > 0 || count($laptopQuantities) > 0) {
+        echo json_encode($result);
+    } else {
+        echo json_encode(['message' => 'No quantities found']);
+    }
 
-// Close the connection
-sqlsrv_close($conn);
+    // Close the connection
+    sqlsrv_close($conn);
 } catch (Exception $e) {
     echo json_encode(['error' => $e->getMessage()]);
 }

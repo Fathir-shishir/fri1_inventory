@@ -13,7 +13,8 @@ import AddScrapMobile from './pages/AddScrapMobile';
 import Mobiles from './pages/Mobiles';
 import Laptops from './pages/Laptops';
 import Cookies from "js-cookie";
-
+import AddLaptops from './pages/AddLaptops';
+import AssignedLaptop from './pages/AssignedLaptop';
 
 // Global states
 import { useSession } from "./globalStates/session.state";
@@ -70,8 +71,10 @@ function App() {
                     <Route path="/laptops" element={<Laptops />} />
                     <Route path="/home" element={<HomePage />} />
                     <Route path="/storeMobile" element={<AddMobiles />} />
+                    <Route path="/addLaptops" element={<AddLaptops />} />
                     <Route path="/details/:email" element={<Details />} />
                     <Route path="/Adduser" element={<Adduser/>} />
+                    <Route path="/assignedLaptop" element={<AssignedLaptop/>} />
                     <Route path="/editMobile/:assignmentId" element={<EditMobile/>} />
                     <Route path="/dashboard" element={<Dashboard></Dashboard>} />
                     <Route path="/history" element={<History></History>} />
