@@ -29,7 +29,7 @@ const HomePage = () => {
 
     return (
         <Layout>
-            <h1 className="text-center font-semibold p-3 text-4xl">Welcome {sessionState.name} to the Inventory Manager!</h1>
+            <h1 className="text-center font-semibold p-3 text-4xl">Welcome {sessionState.name} to the Inventory application!</h1>
         </Layout>
     )
 }
